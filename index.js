@@ -8,8 +8,8 @@ const document = dom.window.document;
 const fs = require('fs');
 const adminssionNumbers = [];
 
-const from = 3045701;
-const to = 100;
+const from = 3045758;
+const to = 10;
 
 async function run() {
   for (let admNo = from; admNo <= from + to; admNo++) {
@@ -85,7 +85,7 @@ async function run() {
     if (admNo == from + to) {
       console.log("admNo == from + to", admNo == from + to, admNo, from + to)
       console.log(adminssionNumbers);
-      fs.writeFile('adminssionNumbers.txt', JSON.stringify(adminssionNumbers), function (err) {
+      fs.writeFile('adminssionNumbers.txt', JSON.stringify(adminssionNumbers).replace('[', '').replace(']', '').replaceAll(',', '\n'), function (err) {
         if (err) throw err;
         console.log('Saved!');
       });
