@@ -5,11 +5,11 @@ const jsdom = require("jsdom");
 const dom = new jsdom.JSDOM();
 // Get the document object from the JSDOM instance
 const document = dom.window.document;
-
+const fs = require('fs');
 const adminssionNumbers = [];
 
-const from = 3045755;
-const to = 10;
+const from = 3045701;
+const to = 100;
 
 async function run() {
   for (let admNo = from; admNo <= from + to; admNo++) {
@@ -44,25 +44,25 @@ async function run() {
     });
     const html_data = JSON.parse(response.body)[2].data;
 
-        // Create a DOM element from the HTML data
+    // Create a DOM element from the HTML data
     const div = document.createElement("div");
     div.innerHTML = html_data;
 
 
-        // Find the table element in the DOM element
+    // Find the table element in the DOM element
     const table = div.querySelector("table");
 
     console.log('table', table)
 
     if (table) {
-// Extract the table headers
+      // Extract the table headers
       const headers = [];
       const ths = table.querySelectorAll("th");
       for (let i = 0; i < ths.length; i++) {
         headers.push(ths[i].textContent.trim());
       }
 
-          // Extract the table rows
+      // Extract the table rows
       let data = [];
       let trs = table.querySelectorAll("tr");
       for (let i = 0; i < trs.length; i++) {
@@ -76,7 +76,7 @@ async function run() {
         }
       }
 
-          // Print the JSON data
+      // Print the JSON data
       console.log(data[0]);
     } else {
       adminssionNumbers.push(admNo);
@@ -85,6 +85,10 @@ async function run() {
     if (admNo == from + to) {
       console.log("admNo == from + to", admNo == from + to, admNo, from + to)
       console.log(adminssionNumbers);
+      fs.writeFile('adminssionNumbers.txt', JSON.stringify(adminssionNumbers), function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     }
   }
 }
