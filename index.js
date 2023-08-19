@@ -8,11 +8,17 @@ const document = dom.window.document;
 const fs = require('fs');
 const adminssionNumbers = [];
 
-const from = 3045758;
-const to = 10;
+const from = +process.argv[2];
+const range = +process.argv[3] - 1 || 9;
+const tcData = +process.argv[4] || 0;
+
+if (isNaN(from)) {
+  console.error('Please provide valid numbers as arguments. Example - npm start 3045701 10');
+  process.exit(1);
+}
 
 async function run() {
-  for (let admNo = from; admNo <= from + to; admNo++) {
+  for (let admNo = from; admNo <= from + range; admNo++) {
     const options = {
       'method': 'POST',
       'url': 'https://no2udaipur.kvs.ac.in/views/ajax',
@@ -52,38 +58,41 @@ async function run() {
     // Find the table element in the DOM element
     const table = div.querySelector("table");
 
-    console.log('table', table)
-
     if (table) {
-      // Extract the table headers
-      const headers = [];
-      const ths = table.querySelectorAll("th");
-      for (let i = 0; i < ths.length; i++) {
-        headers.push(ths[i].textContent.trim());
-      }
-
-      // Extract the table rows
-      let data = [];
-      let trs = table.querySelectorAll("tr");
-      for (let i = 0; i < trs.length; i++) {
-        let row = {};
-        let tds = trs[i].querySelectorAll("td");
-        for (let j = 0; j < tds.length; j++) {
-          row[headers[j]] = tds[j].textContent.trim();
+      let tcIssuedData = `\x1b[32m\u2713 ${admNo}\x1b[0m`;
+      if (tcData) {
+        // Extract the table headers
+        const headers = [];
+        const ths = table.querySelectorAll("th");
+        for (let i = 0; i < ths.length; i++) {
+          headers.push(ths[i].textContent.trim());
         }
-        if (Object.keys(row).length > 0) {
-          data.push(row);
-        }
-      }
 
-      // Print the JSON data
-      console.log(data[0]);
+        // Extract the table rows
+        let data = [];
+        let trs = table.querySelectorAll("tr");
+        for (let i = 0; i < trs.length; i++) {
+          let row = {};
+          let tds = trs[i].querySelectorAll("td");
+          for (let j = 0; j < tds.length; j++) {
+            row[headers[j]] = tds[j].textContent.trim();
+          }
+          if (Object.keys(row).length > 0) {
+            data.push(row);
+          }
+        }
+
+        // To print the JSON data
+        tcIssuedData = data[0];
+      }
+      console.log(tcIssuedData);
     } else {
+      console.log(`\x1b[31m\u2715 ${admNo}\x1b[0m`);
       adminssionNumbers.push(admNo);
     }
 
-    if (admNo == from + to) {
-      console.log("admNo == from + to", admNo == from + to, admNo, from + to)
+    if (admNo == from + range) {
+      console.log("Processed admission numbers from", from, "to", from + range)
       console.log(adminssionNumbers);
       fs.writeFile('adminssionNumbers.txt', JSON.stringify(adminssionNumbers).replace('[', '').replace(']', '').replaceAll(',', '\n'), function (err) {
         if (err) throw err;
