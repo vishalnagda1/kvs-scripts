@@ -71,46 +71,57 @@ Make sure you have the following installed. And the installation will be based o
     - Node JS User
 
         ```shell
-        npm start <from> <range> <logTcData>
+        npm start <url> <from> <range> <logTcData>
         ```
     - Python User
 
         ```shell
-        python tc-data.py <from> <range> <log_tc_data>
+        python tc-data.py <url> <from> <range> <log_tc_data>
         ```
-        - `from` - It is required, and is the starting admission number e.g.
+        - `url` - It is required, and is the base url of your KV School e.g.
             
             - Node JS
                 ```shell
-                npm start 3045759
+                npm start https://no2udaipur.kvs.ac.in/ 3045701
                 ```
 
             - Python
                 ```shell
-                python tc-data.py 3045759
+                python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701
+                ```
+        - `from` - It is required, and is the starting admission number e.g.
+            
+            - Node JS
+                ```shell
+                npm start https://no2udaipur.kvs.ac.in/ 3045701
+                ```
+
+            - Python
+                ```shell
+                python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701
                 ```
         - `range` - It is optional, and is like how many next admission numbers you want to process like 10 or 20. The default value is 1. e.g.
 
             - Node JS
                 ```shell
-                npm start 3045759 10
+                npm start https://no2udaipur.kvs.ac.in/ 3045701 10
                 ```
             
             - Python
                 ```shell
-                python tc-data.py 3045759 10
+                python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701 10
                 ```
         
         - `logTcData` or `log_tc_data` - It is optional, and is a flag value where 1 means to print TC issued data of processed admisison number and 0 (zero) means to skip the logging TC issue data. The default value is 0. e.g.
             
             - Node js
                 ```shell
-                python tc-data.py 3045759 10 1
+                python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701 10 1
                 ```
 
             - Python
                 ```shell
-                python tc-data.py 3045759 10 1
+                python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701 10 1
                 ```
 
 5. Admission Number File Output:
