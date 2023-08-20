@@ -8,12 +8,21 @@ const document = dom.window.document;
 const fs = require('fs');
 const adminssionNumbers = [];
 
-const from = +process.argv[2];
-const range = +process.argv[3] - 1 || 0;
-const logTcData = +process.argv[4] || 0;
+let url;
+try {
+  url = new URL(process.argv[2]); // create a new URL object
+} catch (error) {
+  console.error('\x1b[31mPlease provide valid kendriya vidyalaya url. \x1b[33mExample - \x1b[32mnpm start \x1b[4mhttps://no2udaipur.kvs.ac.in/\x1b[0m \x1b[32m3045701\x1b[0m');
+  process.exit(1);
+}
+
+const from = +process.argv[3];
+const range = +process.argv[4] - 1 || 0;
+const logTcData = +process.argv[5] || 0;
+
 
 if (isNaN(from)) {
-  console.error('Please provide valid numbers as arguments. Example - npm start 3045701 10');
+  console.error('\x1b[31mPlease provide valid start admission numbers as arguments. \x1b[33mExample - \x1b[32mnpm start https://no2udaipur.kvs.ac.in/ \x1b[4m3045701\x1b[0m \x1b[32m5\x1b[0m');
   process.exit(1);
 }
 
@@ -21,7 +30,7 @@ async function run() {
   for (let admNo = from; admNo <= from + range; admNo++) {
     const options = {
       'method': 'POST',
-      'url': 'https://no2udaipur.kvs.ac.in/views/ajax',
+      'url': `${url.href}views/ajax`,
       'headers': {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1788.0  uacq',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -29,9 +38,9 @@ async function run() {
         'Accept-Encoding': 'gzip, deflate, br',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'X-Requested-With': 'XMLHttpRequest',
-        'Origin': 'https://no2udaipur.kvs.ac.in',
+        'Origin': url.origin,
         'Connection': 'keep-alive',
-        'Referer': 'https://no2udaipur.kvs.ac.in/enrolment-statistics/tc-issued',
+        'Referer': `${url.href}enrolment-statistics/tc-issued`,
         'Cookie': 'has_js=1',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
@@ -93,11 +102,13 @@ async function run() {
 
     if (admNo == from + range) {
       console.log("Processed admission numbers from", from, "to", from + range)
-      console.log(adminssionNumbers);
-      fs.writeFile('admission-numbers.txt', JSON.stringify(adminssionNumbers).replace('[', '').replace(']', '').replaceAll(',', '\n'), function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-      });
+      if (adminssionNumbers.length) {
+        console.log(adminssionNumbers);
+        fs.writeFile('admission-numbers.txt', JSON.stringify(adminssionNumbers).replace('[', '').replace(']', '').replaceAll(',', '\n'), function (err) {
+          if (err) throw err;
+          console.log('Saved!');
+        });
+      }
     }
   }
 }
