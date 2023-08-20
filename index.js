@@ -10,7 +10,7 @@ const adminssionNumbers = [];
 
 const from = +process.argv[2];
 const range = +process.argv[3] - 1 || 9;
-const tcData = +process.argv[4] || 0;
+const logTcData = +process.argv[4] || 0;
 
 if (isNaN(from)) {
   console.error('Please provide valid numbers as arguments. Example - npm start 3045701 10');
@@ -60,7 +60,7 @@ async function run() {
 
     if (table) {
       let tcIssuedData = `\x1b[32m\u2713 ${admNo}\x1b[0m`;
-      if (tcData) {
+      if (logTcData) {
         // Extract the table headers
         const headers = [];
         const ths = table.querySelectorAll("th");
@@ -94,7 +94,7 @@ async function run() {
     if (admNo == from + range) {
       console.log("Processed admission numbers from", from, "to", from + range)
       console.log(adminssionNumbers);
-      fs.writeFile('adminssionNumbers.txt', JSON.stringify(adminssionNumbers).replace('[', '').replace(']', '').replaceAll(',', '\n'), function (err) {
+      fs.writeFile('admission-numbers.txt', JSON.stringify(adminssionNumbers).replace('[', '').replace(']', '').replaceAll(',', '\n'), function (err) {
         if (err) throw err;
         console.log('Saved!');
       });
