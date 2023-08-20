@@ -9,7 +9,7 @@ const fs = require('fs');
 const adminssionNumbers = [];
 
 const from = +process.argv[2];
-const range = +process.argv[3] - 1 || 9;
+const range = +process.argv[3] - 1 || 0;
 const logTcData = +process.argv[4] || 0;
 
 if (isNaN(from)) {
