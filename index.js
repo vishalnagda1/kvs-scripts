@@ -1,3 +1,10 @@
+/*******************************************
+ * This script searches all the admission  *
+ * numbers for which the TC data is yet to *
+ * be upload on the KVS website and stores *
+ * it in a file for further use.           *
+ ******************************************/
+
 const request = require('request');
 // Import the jsdom module
 const jsdom = require("jsdom");

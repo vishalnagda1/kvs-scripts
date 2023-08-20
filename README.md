@@ -1,6 +1,6 @@
 # Kendriya Vidyalay TC Data
 
-These scripts are used to get the admission numbers for which the online TC is yet to be issue or ommited to issue.
+This script searches all the admission numbers for which the TC data is yet to be upload on the KVS website and stores it in a file for further use.
 
 There are two scripts:
 

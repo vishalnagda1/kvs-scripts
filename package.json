@@ -1,7 +1,7 @@
 {
   "name": "kvs-tc",
   "version": "1.0.0",
-  "description": "",
+  "description": "This script searches all the admission numbers for which the TC data is yet to be upload on the KVS website and stores it in a file for further use.",
   "main": "index.js",
   "scripts": {
     "start": "node index",
