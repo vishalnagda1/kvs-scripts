@@ -58,13 +58,17 @@ Make sure you have the following installed. And the installation will be based o
    cd kvs-scripts
    ```
 
-3. Install project dependencies [**`Only for Node JS Users`**]
+3. Install project dependencies
    
-   **Note:** This step is only for Node JS users, if you're using python skip this step.
-
-   ```shell
-   npm install
-   ```
+   - Node JS
+        ```shell
+        npm install
+        ```
+    
+    - Python
+        ```shell
+        pip install -r requirements.pip
+        ```
 
 4. Run the Script
 
