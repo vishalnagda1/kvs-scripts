@@ -1,6 +1,6 @@
 # Kendriya Vidyalay TC Data
 
-This script searches all the admission numbers for which the TC data is yet to be upload on the KVS website and stores it in a file for further use.
+This script searches all the tc numbers for which the TC data is yet to be upload on the KVS website and stores it in a file for further use.
 
 There are two scripts:
 
@@ -93,7 +93,7 @@ Make sure you have the following installed. And the installation will be based o
                 ```shell
                 python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701
                 ```
-        - `from` - It is required, and is the starting admission number e.g.
+        - `from` - It is required, and is the starting tc number e.g.
             
             - Node JS
                 ```shell
@@ -104,7 +104,7 @@ Make sure you have the following installed. And the installation will be based o
                 ```shell
                 python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701
                 ```
-        - `range` - It is optional, and is like how many next admission numbers you want to process like 10 or 20. The default value is 1. e.g.
+        - `range` - It is optional, and is like how many next tc numbers you want to process like 10 or 20. The default value is 1. e.g.
 
             - Node JS
                 ```shell
@@ -128,9 +128,9 @@ Make sure you have the following installed. And the installation will be based o
                 python tc-data.py https://no2udaipur.kvs.ac.in/ 3045701 10 1
                 ```
 
-5. Admission Number File Output:
+5. TC Number File Output:
 
-   - Both script will generate `admission-numbers.txt` file in the project directory. It contains all the admission number whose TCs are not yet issued or omitted to issue.
+   - Both script will generate `tc-numbers.txt` file in the project directory. It contains all the tc number whose TCs are not yet issued or omitted to issue.
 
 
 
