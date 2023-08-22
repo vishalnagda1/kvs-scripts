@@ -33,6 +33,11 @@ if (isNaN(from)) {
   process.exit(1);
 }
 
+if (range > 99) {
+  console.error(`\x1b[31mRange Error: The maximum range should be 100, you have provided ${range + 1}\x1b[0m`);
+  process.exit(1);
+}
+
 async function run() {
   for (let admNo = from; admNo <= from + range; admNo++) {
     const options = {

@@ -38,6 +38,10 @@ if adm_no_from <= 0:
   print('\x1b[31mPlease provide valid start admission numbers as arguments. \x1b[33mExample - \x1b[32mpython script.py https://no2udaipur.kvs.ac.in/ \x1b[4m3045701\x1b[0m \x1b[32m5\x1b[0m')
   sys.exit(1) # exit the program with an error code
 
+if adm_no_range > 99:
+  print('\x1b[31mRange Error: The maximum range should be 100, you have provided '+ str(adm_no_range + 1) +'\x1b[0m')
+  sys.exit(1)
+
 
 headers = {
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1788.0  uacq',
