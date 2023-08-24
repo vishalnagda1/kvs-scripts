@@ -17,7 +17,7 @@ function parseArguments() {
   try {
     url = new URL(process.argv[2]);
   } catch (error) {
-    console.error('\x1b[31mPlease provide valid kendriya vidyalaya url. \x1b[33mExample - \x1b[32mnpm start \x1b[4mhttps://no2udaipur.kvs.ac.in/\x1b[0m \x1b[32m3045701\x1b[0m');
+    console.error('\x1b[31mPlease provide a valid Kendriya Vidyalaya URL.\x1b[0m');
     process.exit(1);
   }
 
@@ -26,12 +26,12 @@ function parseArguments() {
   const logTcData = +process.argv[5] || 0;
 
   if (isNaN(from)) {
-    console.error('\x1b[31mPlease provide valid start tc numbers as arguments. \x1b[33mExample - \x1b[32mnpm start https://no2udaipur.kvs.ac.in/ \x1b[4m3045701\x1b[0m \x1b[32m5\x1b[0m');
+    console.error('\x1b[31mPlease provide a valid starting TC number.\x1b[0m');
     process.exit(1);
   }
 
   if (range > 99) {
-    console.error(`\x1b[31mRange Error: The maximum range should be 100, you have provided ${range + 1}\x1b[0m`);
+    console.error(`\x1b[31mRange Error: The maximum range should be 100.\x1b[0m`);
     process.exit(1);
   }
 
