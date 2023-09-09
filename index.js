@@ -115,14 +115,7 @@ async function run(url, from, range, logTcData) {
     for (let i = 0; i < responses.length; i++) {
       const response = responses[i];
       const html_data = JSON.parse(response.body)[2].data;
-      await processTCData(from + i, html_data, logTcData, i+1);
-    }
-
-    console.log("Processed tc numbers from", from, "to", from + range);
-
-    if (pendingTcNumbers.length) {
-      await fs.writeFile('tc-numbers.txt', pendingTcNumbers.join('\n'));
-      console.log('Saved!');
+      await processTCData(from + i, html_data, logTcData, i + 1);
     }
 
     const responseData = await { pendingTcNumbers, uploadedTcNumbers };
@@ -135,11 +128,15 @@ async function run(url, from, range, logTcData) {
 // When running from CLI
 function runCLI() {
   const { url, from, range, logTcData } = parseArguments();
-  run(url, from, range, logTcData).then((err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
+  run(url, from, range, logTcData).then(async (data) => {
+    if (data) {
+      console.log("Processed tc numbers from", from, "to", from + range);
       console.log(data);
+
+      if (data.pendingTcNumbers.length) {
+        await fs.writeFile('tc-numbers.txt', pendingTcNumbers.join('\n'));
+        console.log('Saved!');
+      }
     }
   });
 }
