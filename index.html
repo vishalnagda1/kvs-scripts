@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>KV School TC Data</title>
+    <link rel="stylesheet" href="index.css" type="text/css" media="all" />
+</head>
+
+<body style="user-select: none;">
+    <h1>KV School TC Data</h1>
+    <form id="dataForm">
+        <label for="schoolUrl">KV School URL:</label>
+        <input type="url" id="schoolUrl" pattern="^(http|https)://(www.)?([a-zA-Z0-9]+).kvs.ac.in(/)?$" required><br><br>
+
+        <label for="startingTC">Starting TC Number:</label>
+        <input type="number" id="startingTC" min="100000" max="9999999" required><br><br>
+
+        <label for="range">Range (1-50):</label>
+        <input type="number" id="range" min="1" max="50" value="1"><br><br>
+
+        <label for="logData">Log Student TC Data:</label>
+        <input type="checkbox" id="logData"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="tableContainer">
+        <!-- Table will be displayed here -->
+    </div>
+    <script src='./renderer.js'></script>
+</body>
+
+</html>
